@@ -66,19 +66,4 @@ reStart.addEventListener("click", function() {
     message.textContent = "Prepárate"; // Restablece el mensaje
 });
 
-// Dentro de tu script principal
-if (window.Worker) {
-    const myWorker = new Worker('timerWorker.js');
-
-    myWorker.onmessage = function(e) {
-        const count = e.data;
-        // Actualiza tu UI con el valor de 'count'
-        // Por ejemplo, actualizando el contenido de un elemento para mostrar el tiempo
-        document.getElementById('hms').textContent = count; // Ajusta según cómo quieras mostrar el tiempo
-    };
-
-    // Añade aquí cualquier otro control de tu UI, como iniciar o detener el worker
-} else {
-    // Los Web Workers no son soportados en este navegador.
-}
 
