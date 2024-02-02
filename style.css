@@ -8,12 +8,14 @@ body {
     margin: 0;
     background-color: #121212; /* Fondo oscuro */
     color: #e0e0e0; /* Texto claro */
+    padding: 0 20px; /* Asegura un poco de margen en los lados en móviles */
 }
 
 .title {
-    margin-bottom: 20px;
+    margin: 20px 0; /* Ajustado para dar espacio tanto arriba como abajo */
     text-transform: uppercase;
     color: #FFFFFF; /* Texto claro para el título */
+    text-align: center; /* Asegura que el título esté centrado en dispositivos móviles */
 }
 
 .container {
@@ -76,7 +78,6 @@ body {
     background-color: #fb8c00;
 }
 
-/* Estilo para el texto bajo "Eyecare Timer" */
 .eyecare-text {
     font-size: 1.2em;
     color: #e0e0e0;
@@ -118,9 +119,11 @@ body {
     color: #fff;
     text-align: center;
     padding: 10px 0;
-    position: absolute;
+    position: fixed; /* Cambiado de absolute a fixed para asegurar visibilidad */
     bottom: 0;
+    left: 0;
     width: 100%;
+    box-sizing: border-box; /* Asegura que el padding no altere el ancho */
 }
 
 .footer p {
@@ -128,11 +131,12 @@ body {
     font-size: 0.8em;
 }
 
-
-
-
-
 @media (max-width: 600px) {
+    body {
+        height: auto; /* Permite que el contenido defina la altura */
+        min-height: 100vh; /* Asegura que el viewport sea completamente cubierto */
+        padding-bottom: 50px; /* Espacio adicional para el footer en móviles */
+    }
     .boton {
         padding: 8px 15px;
         margin: 0 5px;
