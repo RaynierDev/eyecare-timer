@@ -1,6 +1,6 @@
 let elapsedTime = 0;
 let timerInterval;
-const tiempoTrabajo = 5 * 60 * 1000; // 20 minutos en milisegundos
+const tiempoTrabajo = 3 * 60 * 1000; // 20 minutos en milisegundos
 const tiempoDescanso = 10 * 1000; // 20 segundos en milisegundos
 let enPeriodoDeTrabajo = true;
 
