@@ -88,3 +88,27 @@ function reproducir(id) {
   var audioElement = document.getElementById(id);
   audioElement.play();
 }
+document.addEventListener('DOMContentLoaded', (event) => {
+  // Asegurarse de que el DOM está completamente cargado
+
+  // Obtener los botones por ID
+  const playSound1Button = document.getElementById('btn-trabajo');
+  const playSound2Button = document.getElementById('btn-descanso');
+
+  // Añadir un event listener a cada botón
+  playSound1Button.addEventListener('click', function() {
+      reproducir('sound1');
+  });
+
+  playSound2Button.addEventListener('click', function() {
+      reproducir('sound2');
+  });
+});
+
+function reproducir(soundId) {
+  // Asegúrate de que esta función maneje correctamente la reproducción del sonido.
+  const sound = document.getElementById(soundId);
+  if (sound) {
+      sound.play();
+  }
+}
