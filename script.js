@@ -1,69 +1,69 @@
-let start = document.getElementById("btn-start");
-let reStart = document.getElementById("btn-restart");
-let stop = document.getElementById("btn-stop");
-let hms = document.getElementById("hms");
-let message = document.getElementById("message"); // Nuevo elemento de mensaje
-let sound1 = document.getElementById("sound1");
-let sound2 = document.getElementById("sound2");
-let countdown; // Variable para almacenar el identificador del intervalo
+let elapsedTime = 0;
+let timerInterval;
+const tiempoTrabajo = 5 * 60 * 1000; // 20 minutos en milisegundos
+const tiempoDescanso = 10 * 1000; // 20 segundos en milisegundos
+let enPeriodoDeTrabajo = true;
 
-// Función para actualizar el contador
-function updateCountdown(seconds) {
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    const remainingSeconds = seconds % 60;
-
-    hms.innerHTML = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+function toggleCiclo() {
+  if (enPeriodoDeTrabajo) {
+    // Cambiar a período de descanso
+    elapsedTime = 0; // Reiniciar tiempo transcurrido
+    enPeriodoDeTrabajo = false;
+    document.getElementById('sound2').play(); // Sonido para inicio del descanso
+    document.getElementById('message').textContent = "Descanso: mira lejos durante 20 segundos";
+  } else {
+    // Cambiar a período de trabajo
+    elapsedTime = 0; // Reiniciar tiempo transcurrido
+    enPeriodoDeTrabajo = true;
+    document.getElementById('sound1').play(); // Sonido para inicio del trabajo
+    document.getElementById('message').textContent = "Trabajo: 20 minutos de enfoque";
+  }
 }
 
-// Función para iniciar el temporizador
-function startTimer(duration) {
-    let seconds = duration;
-    updateCountdown(seconds);
+function updateTimer() {
+  let tiempoCiclo = enPeriodoDeTrabajo ? tiempoTrabajo : tiempoDescanso;
+  let remainingTime = tiempoCiclo - elapsedTime;
+  
+  if (remainingTime <= 0) {
+    toggleCiclo();
+    return; // Finaliza aquí para evitar ejecución adicional después de cambiar de ciclo
+  }
 
-    // Actualiza el mensaje
-    if (duration === 1200) {
-        message.textContent = "Puedes ver tu pantalla";
-    } else {
-        message.textContent = "Mira hacia un punto lejano";
-    }
+  // Calcular minutos y segundos restantes
+  let seconds = Math.floor((remainingTime / 1000) % 60);
+  let minutes = Math.floor((remainingTime / (1000 * 60)) % 60);
 
-    countdown = setInterval(function() {
-        seconds--;
-        updateCountdown(seconds);
+  // Actualizar el display del temporizador
+  document.getElementById('hms').textContent = `${pad(minutes)}:${pad(seconds)}`;
+}
 
-        if (seconds <= 0) {
-            clearInterval(countdown); // Detiene el intervalo
-
-            if (duration === 1200) {
-                sound1.play(); // Reproduce el sonido para el temporizador 
-            } else {
-                sound2.play(); // Reproduce otro sonido para el temporizador
-            }
-
-            let nextDuration = duration === 1200 ? 20 : 1200;
-            startTimer(nextDuration);
-        }
+function startTimer() {
+  if (!timerInterval) {
+    timerInterval = setInterval(() => {
+      elapsedTime += 1000; // Incrementar en un segundo
+      updateTimer();
     }, 1000);
+  }
 }
 
-// Función que se ejecuta cuando se hace clic en el botón "Iniciar"
-start.addEventListener("click", function() {
-    message.textContent = "Prepárate"; // Mensaje inicial al empezar
-    startTimer(1200); // Inicia con 1200 segundos
-});
+function stopTimer() {
+  clearInterval(timerInterval);
+  timerInterval = null;
+  elapsedTime = 0;
+  enPeriodoDeTrabajo = true; // Resetea al estado inicial
+  document.getElementById('hms').textContent = '20:00'; // Restablece el temporizador a 20 minutos
+  document.getElementById('message').textContent = "Prepárate"; // Mensaje inicial
+}
 
-// Función que se ejecuta cuando se hace clic en el botón "Detener"
-stop.addEventListener("click", function() {
-    clearInterval(countdown); // Detiene el intervalo
-    message.textContent = "Detenido"; // Actualiza el mensaje
-});
+function restartTimer() {
+  stopTimer();
+  startTimer();
+}
 
-// Función que se ejecuta cuando se hace clic en el botón "Reiniciar"
-reStart.addEventListener("click", function() {
-    clearInterval(countdown); // Detiene el intervalo
-    hms.innerHTML = "00:00:00"; // Restablece el contador a 00:00:00
-    message.textContent = "Prepárate"; // Restablece el mensaje
-});
+document.getElementById('btn-start').addEventListener('click', startTimer);
+document.getElementById('btn-stop').addEventListener('click', stopTimer);
+document.getElementById('btn-restart').addEventListener('click', restartTimer);
 
-
+function pad(number) {
+  return number < 10 ? '0' + number : number;
+}
