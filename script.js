@@ -47,12 +47,6 @@ function startTimer(tiempoCiclo) {
       updateTimer(tiempoCiclo);
     }, 1000);
   }
-  // Asegurar que el mensaje se actualiza al iniciar el temporizador
-  if (enPeriodoDeTrabajo) {
-    document.getElementById('message').textContent = "Trabajo: 20 minutos de enfoque"; // Mensaje para trabajo
-  } else {
-    document.getElementById('message').textContent = "Descanso: mira lejos durante 20 segundos"; // Mensaje para descanso
-  }
 }
 
 function stopTimer() {
@@ -66,9 +60,7 @@ function stopTimer() {
 
 function restartTimer() {
   stopTimer();
-  enPeriodoDeTrabajo = true; // Asegurar que el estado se reinicie para comenzar desde el trabajo
-  document.getElementById('message').textContent = "Trabajo: 20 minutos de enfoque"; // Actualizar mensaje
-  startTimer(tiempoTrabajo); // Asegúrate de iniciar con el tiempo de trabajo
+  startTimer(tiempoTrabajo); // Asegúrese de iniciar con el tiempo de trabajo
 }
 
 document.getElementById('btn-start').addEventListener('click', function() { startTimer(tiempoTrabajo); });
@@ -77,38 +69,4 @@ document.getElementById('btn-restart').addEventListener('click', restartTimer);
 
 function pad(number) {
   return number < 10 ? '0' + number : number;
-}
-
-function ajustarVolumen(id, valor) {
-  var audioElement = document.getElementById(id);
-  audioElement.volume = valor;
-}
-
-function reproducir(id) {
-  var audioElement = document.getElementById(id);
-  audioElement.play();
-}
-document.addEventListener('DOMContentLoaded', (event) => {
-  // Asegurarse de que el DOM está completamente cargado
-
-  // Obtener los botones por ID
-  const playSound1Button = document.getElementById('btn-trabajo');
-  const playSound2Button = document.getElementById('btn-descanso');
-
-  // Añadir un event listener a cada botón
-  playSound1Button.addEventListener('click', function() {
-      reproducir('sound1');
-  });
-
-  playSound2Button.addEventListener('click', function() {
-      reproducir('sound2');
-  });
-});
-
-function reproducir(soundId) {
-  // Asegúrate de que esta función maneje correctamente la reproducción del sonido.
-  const sound = document.getElementById(soundId);
-  if (sound) {
-      sound.play();
-  }
 }
