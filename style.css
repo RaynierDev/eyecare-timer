@@ -163,6 +163,13 @@ body {
     .footer p {
         font-size: 0.7em;
     }
+        /* Oculta los controles de volumen en dispositivos móviles */
+        label[for="volumeSound1"],
+        input#volumeSound1,
+        label[for="volumeSound2"],
+        input#volumeSound2 {
+            display: none;
+        }
 }
 /* Estilos Generales para los Sliders */
 input[type="range"] {
@@ -209,3 +216,6 @@ label {
     text-align: left; /* Alinea el texto a la izquierda */
 }
 
+.boton-reproduccion {
+    margin-top: 10px;
+}
