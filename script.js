@@ -5,23 +5,26 @@ const tiempoDescanso = 20 * 1000; // 20 segundos en milisegundos
 let enPeriodoDeTrabajo = true;
 
 function toggleCiclo() {
+  clearInterval(timerInterval); // Limpiar el intervalo anterior
+  timerInterval = null; // Restablecer el intervalo
   if (enPeriodoDeTrabajo) {
     // Cambiar a período de descanso
-    elapsedTime = 0; // Reiniciar tiempo transcurrido
     enPeriodoDeTrabajo = false;
     document.getElementById('sound2').play(); // Sonido para inicio del descanso
     document.getElementById('message').textContent = "Descanso: mira lejos durante 20 segundos";
+    elapsedTime = 0; // Reiniciar tiempo transcurrido
+    startTimer(tiempoDescanso); // Iniciar temporizador de descanso
   } else {
     // Cambiar a período de trabajo
-    elapsedTime = 0; // Reiniciar tiempo transcurrido
     enPeriodoDeTrabajo = true;
     document.getElementById('sound1').play(); // Sonido para inicio del trabajo
     document.getElementById('message').textContent = "Trabajo: 20 minutos de enfoque";
+    elapsedTime = 0; // Reiniciar tiempo transcurrido
+    startTimer(tiempoTrabajo); // Iniciar temporizador de trabajo
   }
 }
 
-function updateTimer() {
-  let tiempoCiclo = enPeriodoDeTrabajo ? tiempoTrabajo : tiempoDescanso;
+function updateTimer(tiempoCiclo) {
   let remainingTime = tiempoCiclo - elapsedTime;
   
   if (remainingTime <= 0) {
@@ -37,12 +40,18 @@ function updateTimer() {
   document.getElementById('hms').textContent = `${pad(minutes)}:${pad(seconds)}`;
 }
 
-function startTimer() {
+function startTimer(tiempoCiclo) {
   if (!timerInterval) {
     timerInterval = setInterval(() => {
       elapsedTime += 1000; // Incrementar en un segundo
-      updateTimer();
+      updateTimer(tiempoCiclo);
     }, 1000);
+  }
+  // Asegurar que el mensaje se actualiza al iniciar el temporizador
+  if (enPeriodoDeTrabajo) {
+    document.getElementById('message').textContent = "Trabajo: 20 minutos de enfoque"; // Mensaje para trabajo
+  } else {
+    document.getElementById('message').textContent = "Descanso: mira lejos durante 20 segundos"; // Mensaje para descanso
   }
 }
 
@@ -57,10 +66,12 @@ function stopTimer() {
 
 function restartTimer() {
   stopTimer();
-  startTimer();
+  enPeriodoDeTrabajo = true; // Asegurar que el estado se reinicie para comenzar desde el trabajo
+  document.getElementById('message').textContent = "Trabajo: 20 minutos de enfoque"; // Actualizar mensaje
+  startTimer(tiempoTrabajo); // Asegúrate de iniciar con el tiempo de trabajo
 }
 
-document.getElementById('btn-start').addEventListener('click', startTimer);
+document.getElementById('btn-start').addEventListener('click', function() { startTimer(tiempoTrabajo); });
 document.getElementById('btn-stop').addEventListener('click', stopTimer);
 document.getElementById('btn-restart').addEventListener('click', restartTimer);
 
