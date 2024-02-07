@@ -67,3 +67,13 @@ document.getElementById('btn-restart').addEventListener('click', restartTimer);
 function pad(number) {
   return number < 10 ? '0' + number : number;
 }
+
+function ajustarVolumen(id, valor) {
+  var audioElement = document.getElementById(id);
+  audioElement.volume = valor;
+}
+
+function reproducir(id) {
+  var audioElement = document.getElementById(id);
+  audioElement.play();
+}

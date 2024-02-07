@@ -32,8 +32,20 @@
     <div class="boton stop" id="btn-stop">stop</div>
     <div class="boton reiniciar" id="btn-restart">restart</div>
     </div>
-    <audio src="./assets/Digital-Beep-Warning-Alert.mp3" id="sound1"></audio>
-    <audio src="./assets/Clear-Long-Bell-01.wav" id="sound2"></audio>
+    <div>
+        <label for="volumeSound1">Volumen aviso trabajo:</label>
+        <input type="range" id="volumeSound1" min="0" max="1" step="0.01" value="0.5" onchange="ajustarVolumen('sound1', this.value)">
+        <audio src="./assets/Digital-Beep-Warning-Alert.mp3" id="sound1" preload="auto"></audio>
+      </div>
+      <div>
+        <label for="volumeSound2">Volumen aviso descanso:</label>
+        <input type="range" id="volumeSound2" min="0" max="1" step="0.01" value="0.5" onchange="ajustarVolumen('sound2', this.value)">
+        <audio src="./assets/Clear-Long-Bell-01.wav" id="sound2" preload="auto"></audio>
+      </div>
+      
+      <button onclick="reproducir('sound1')" class="boton boton-reproduccion" >TRABAJO</button>
+      <button onclick="reproducir('sound2')" class="boton boton-reproduccion">DESCANSO</button>
+      
 
 </div>
 <div class="info-boxes">

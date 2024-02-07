@@ -53,7 +53,13 @@ body {
     text-transform: uppercase;
     transition: background-color 0.3s;
 }
+.boton-reproduccion {
+    background-color: #4a90e2; /* Color específico para botones de reproducción */
+}
 
+.boton-reproduccion:hover {
+    background-color: #3a7fd5; /* Color más oscuro al pasar el mouse para indicar interactividad */
+}
 .start {
     background-color: #4caf50;
 }
@@ -158,3 +164,48 @@ body {
         font-size: 0.7em;
     }
 }
+/* Estilos Generales para los Sliders */
+input[type="range"] {
+    -webkit-appearance: none; /* Remueve el estilo predeterminado para WebKit/Blink */
+    appearance: none;
+    width: 100%; /* Ancho completo para llenar el contenedor */
+    height: 8px; /* Altura del track */
+    background: #333; /* Color de fondo del track */
+    outline: none; /* Remueve el outline al hacer focus */
+    opacity: 0.7; /* Hace el slider ligeramente transparente */
+    -webkit-transition: opacity .2s; /* Transición suave para WebKit/Blink */
+    transition: opacity .2s;
+    border-radius: 5px; /* Bordes redondeados para el track */
+}
+
+input[type="range"]:hover {
+    opacity: 1; /* Opacidad completa al pasar el mouse */
+}
+
+/* Estilo para el Thumb del Slider (el círculo que se desliza) */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Remueve el estilo predeterminado para WebKit/Blink */
+    appearance: none;
+    width: 20px; /* Ancho del thumb */
+    height: 20px; /* Altura del thumb */
+    background: #4a90e2; /* Color de fondo del thumb */
+    cursor: pointer; /* Cursor en forma de puntero */
+    border-radius: 50%; /* Hace el thumb completamente redondo */
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 20px; /* Ancho del thumb */
+    height: 20px; /* Altura del thumb */
+    background: #4a90e2; /* Color de fondo del thumb */
+    cursor: pointer; /* Cursor en forma de puntero */
+    border-radius: 50%; /* Hace el thumb completamente redondo */
+}
+
+/* Estilos para las Etiquetas */
+label {
+    display: block; /* Hace que la etiqueta use todo el ancho disponible */
+    margin: 20px 0 10px; /* Espaciado arriba y abajo de la etiqueta */
+    color: #e0e0e0; /* Color de texto claro */
+    text-align: left; /* Alinea el texto a la izquierda */
+}
+
