@@ -189,24 +189,26 @@ input[type="range"]:hover {
     opacity: 1; /* Opacidad completa al pasar el mouse */
 }
 
-/* Estilo para el Thumb del Slider (el círculo que se desliza) */
+/* Estilo para el Thumb del Slider (el círculo que se desliza) 
 input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none; /* Remueve el estilo predeterminado para WebKit/Blink */
+    -webkit-appearance: none; /* Remueve el estilo predeterminado para WebKit/Blink 
     appearance: none;
-    width: 20px; /* Ancho del thumb */
-    height: 20px; /* Altura del thumb */
-    background: #4a90e2; /* Color de fondo del thumb */
-    cursor: pointer; /* Cursor en forma de puntero */
-    border-radius: 50%; /* Hace el thumb completamente redondo */
+    width: 20px; /* Ancho del thumb 
+    height: 20px; /* Altura del thumb 
+    background: #4a90e2; /* Color de fondo del thumb 
+    cursor: pointer; /* Cursor en forma de puntero 
+    border-radius: 50%; /* Hace el thumb completamente redondo 
 }
 
 input[type="range"]::-moz-range-thumb {
-    width: 20px; /* Ancho del thumb */
-    height: 20px; /* Altura del thumb */
-    background: #4a90e2; /* Color de fondo del thumb */
-    cursor: pointer; /* Cursor en forma de puntero */
-    border-radius: 50%; /* Hace el thumb completamente redondo */
+    width: 20px; /* Ancho del thumb 
+    height: 20px; /* Altura del thumb 
+    background: #4a90e2; /* Color de fondo del thumb 
+    cursor: pointer; /* Cursor en forma de puntero 
+    border-radius: 50%; /* Hace el thumb completamente redondo 
 }
+
+
 
 /* Estilos para las Etiquetas */
 label {
